@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { AuthForm } from "@/components/AuthForm";
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
@@ -13,6 +14,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
         <AuthForm mode="signup" next={next} />
         <p className="muted">Already have an account? <Link href="/login">Log in</Link></p>
       </main>
+      <Footer />
     </>
   );
 }

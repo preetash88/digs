@@ -12,18 +12,18 @@ function line(l: ListingSummary["listing"]) {
   return `Looking in ${l.suburb}`;
 }
 
-export function ListingCard({ item, saved, loggedIn }: { item: ListingSummary; saved: boolean; loggedIn: boolean }) {
+export function ListingCard({ item, saved, loggedIn, i = 0 }: { item: ListingSummary; saved: boolean; loggedIn: boolean; i?: number }) {
   const { listing: l, photos, rating, reviewCount } = item;
   return (
-    <article className="listing">
+    <article className="listing" data-reveal style={{ ["--i" as string]: i % 4 }}>
       <div className="pic">
-        <PhotoCarousel href={`/listings/${l.id}`} title={l.title} photos={photos} seed={l.id} />
+        <PhotoCarousel href={`/listings/${l.id}`} title={l.title} photos={photos} seed={l.id} offset={i} />
         {l.billsIncluded && l.kind !== "wanted" && <span className="badge">Bills included</span>}
         {l.kind !== "wanted" && <FavouriteButton listingId={l.id} initial={saved} loggedIn={loggedIn} />}
       </div>
       <div className="lbody">
         <div className="lrow">
-          <h3><Link href={`/listings/${l.id}`}>{l.suburb}, {l.city}</Link></h3>
+          <h3><Link href={`/listings/${l.id}`}>{l.suburb}<span className="city">, {l.city}</span></Link></h3>
           {rating != null && (
             <span className="rate"><Icon name="star" size={13} />{rating.toFixed(2)}<span className="muted"> ({reviewCount})</span></span>
           )}

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { PostForm } from "@/components/PostForm";
 import { getCurrentUser } from "@/lib/auth";
 
@@ -16,6 +17,7 @@ export default async function PostPage() {
         <p className="muted">It takes about three minutes. You can pause or delete it any time.</p>
         <PostForm defaultCountry="AU" />
       </main>
+      <Footer />
     </>
   );
 }

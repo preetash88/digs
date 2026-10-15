@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { ListingCard } from "@/components/ListingCard";
 import { getCurrentUser } from "@/lib/auth";
 import { getSavedListings } from "@/lib/listings";
@@ -22,6 +23,7 @@ export default async function SavedPage() {
           <div className="empty"><h3>Nothing saved yet</h3><p>Tap the heart on any place to keep it here.</p><Link className="btn primary" href="/">Browse places</Link></div>
         )}
       </main>
+      <Footer />
     </>
   );
 }

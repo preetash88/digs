@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { db } from "@/db";
 import { conversations, listings, messages, users } from "@/db/schema";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { MessageComposer } from "@/components/MessageComposer";
 import { getCurrentUser } from "@/lib/auth";
 import { timeAgo } from "@/lib/format";
@@ -44,6 +45,7 @@ export default async function Thread({ params }: { params: Promise<{ id: string 
         <MessageComposer conversationId={id} />
         <p className="fine2">Keep the conversation on Digs. Never pay before you have inspected the place.</p>
       </main>
+      <Footer />
     </>
   );
 }

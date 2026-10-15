@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { getCurrentUser } from "@/lib/auth";
 import { inbox } from "@/lib/messaging";
 import { timeAgo } from "@/lib/format";
@@ -30,6 +31,7 @@ export default async function MessagesPage() {
           </ul>
         ) : <p className="muted">No messages yet. Find a place you like and say hello.</p>}
       </main>
+      <Footer />
     </>
   );
 }

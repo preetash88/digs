@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Scene } from "@/components/Scene";
 import { ContactForm } from "@/components/ContactForm";
@@ -44,7 +45,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
           {l.kind !== "wanted" && !isOwner && <FavouriteButton listingId={l.id} initial={saved} loggedIn={!!user} variant="text" />}
         </div>
 
-        <div className={`gallery${gallery && gallery.length > 1 ? "" : " single"}`}>
+        <div className={`gallery${(gallery ? Math.min(gallery.length, 5) : l.kind === "wanted" ? 1 : 5) > 1 ? "" : " single"}`}>
           {gallery ? (
             gallery.slice(0, 5).map((src, i) => (
               // eslint-disable-next-line @next/next/no-img-element
@@ -68,7 +69,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
                   </p>
                 </div>
                 <div className="avatar-wrap">
-                  <div className="avatar">{owner.name[0]}</div>
+                  <div className="avatar">{(owner.name ?? "?")[0]}</div>
                   <Link href={`/users/${owner.id}`} className="profile-link">View profile</Link>
                 </div>
               </div>
@@ -120,11 +121,12 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
             {isOwner ? (
               <p className="muted">This is your ad. <Link href="/account">Manage your ads</Link></p>
             ) : l.status === "active" ? (
-              <ContactForm listingId={l.id} loggedIn={!!user} hostName={owner.name.split(" ")[0]} />
+              <ContactForm listingId={l.id} loggedIn={!!user} hostName={(owner.name ?? "the host").split(" ")[0]} />
             ) : null}
           </aside>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

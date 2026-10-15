@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Scene } from "@/components/Scene";
 import { UserReviewForm } from "@/components/UserReviewForm";
@@ -25,7 +26,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
 
         {/* ── Profile card ── */}
         <div className="profile-hero">
-          <div className="profile-avatar large">{user.name[0]}</div>
+          <div className="profile-avatar large">{(user.name ?? "?")[0]}</div>
           <div className="profile-meta">
             <h1>{user.name}</h1>
             <div className="badges">
@@ -48,7 +49,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
         <div className="profile-cols">
           {/* ── Their listings ── */}
           <section className="profile-listings">
-            <h2>{isOwn ? "Your active ads" : `${user.name.split(" ")[0]}'s places`}</h2>
+            <h2>{isOwn ? "Your active ads" : `${(user.name ?? "Member").split(" ")[0]}'s places`}</h2>
             {listings.length ? (
               <div className="grid grid-sm">
                 {listings.map(l => (
@@ -98,12 +99,13 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
 
             {!isOwn && (
               <div style={{ marginTop: 24 }}>
-                <UserReviewForm revieweeId={user.id} revieweeName={user.name} loggedIn={!!viewer} />
+                <UserReviewForm revieweeId={user.id} revieweeName={user.name ?? "this member"} loggedIn={!!viewer} />
               </div>
             )}
           </section>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

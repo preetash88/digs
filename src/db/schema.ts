@@ -35,6 +35,7 @@ export const users = sqliteTable("users", {
   passwordHash: text("password_hash"),
   phone: text("phone"),
   bio: text("bio"),
+  phoneVerified: bool("phone_verified"),
   idVerified: bool("id_verified"),
   role: text("role", { enum: ["host", "seeker", "both"] })
     .notNull()
