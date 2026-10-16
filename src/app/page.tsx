@@ -51,7 +51,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
             <main>
                 <section className="hero">
                     <Landscape country={p.country} />
-                    <div className="wrap hero-in">
+                    <div className="hero-in">
                         <p className="eyebrow fade" style={{ ["--d" as string]: 0.1 }}>
                             <span className="rule" /><CountryLabel country={p.country} long />
                         </p>
@@ -63,8 +63,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
                             Share houses, whole places and short stays across <CountryLabel country={p.country} />, with clear
                             weekly rent and people who&apos;ve been checked.
                         </p>
-                        <div className="tabs fade" style={{ ["--d" as string]: 0.9 }} role="tablist"
-                             aria-label="What are you looking for">
+                    </div>
+
+                    <div className="hero-search">
+                        <div className="tabs fade" style={{ ["--d" as string]: 0.9 }} role="tablist" aria-label="What are you looking for">
                             {KINDS.map(([k, label]) => (
                                 <Link key={k} role="tab" aria-selected={p.kind === k} scroll={false}
                                       href={`/?country=${p.country}&kind=${k}`}>{label}</Link>
@@ -107,6 +109,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
                             <button className="go" type="submit"><Icon name="search" size={20} /><span>Search</span></button>
                         </form>
                     </div>
+
                     <div className="scrollcue" aria-hidden="true"><span>Scroll</span><i /></div>
                 </section>
 
